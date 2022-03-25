@@ -11,8 +11,6 @@ def accuracy(out, label):
     out = np.array(out)
     label = np.array(label)
     total = out.shape[0]
-    #out = torch.argmax(out, axis=1)
-    #correct = (out==label).sum().item() / total
     correct = (out == label).sum().item() / total
     return correct
 
@@ -25,9 +23,6 @@ def sensitivity(out, label):
     return sens
 
 def specificity(out, label):
-    #out = torch.argmax(out, axis=1)
-    #out = out.cpu().detach().numpy()
-    #label = label.cpu().detach().numpy()
     out = np.array(out)
     label = np.array(label)
     mask = (label <= 1e-5)
@@ -51,12 +46,6 @@ def init_weights(m):
             m.bias.data.fill_(0)
         except:
             pass
-    #if isinstance(m, (nn.Conv3d, nn.Conv1d)):
-    #    try:
-    #        if isinstance(m, (nn.Conv3d, nn.Conv1d)):
-    #            nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
-    #    except:
-    #        pass
     elif isinstance(m, (nn.BatchNorm3d, nn.BatchNorm1d, nn.GroupNorm)):
         nn.init.constant_(m.weight, 1)
         nn.init.constant_(m.bias, 0)
@@ -68,15 +57,12 @@ def major_vote(out):
     :param out: numpy.ndarray (3, batch, 2)
     :return: (batch, 2)
     """
-    #print("out : ",out)
     out = np.argmax(out, axis=2)
-    #print("out : ", out)
     _, b = out.shape
     major = np.zeros((b, 2))
     for i in range(b):
         c = Counter(out[:,i])
         major[i, c.most_common()[0][0]] = 1
-    #print("major : ", major)
     return major
 
 def filter_weight(w):
@@ -97,28 +83,6 @@ def filter_weight_module(w):
             out[b] = w[a]
 
     return out
-
-def butter_highpass_filter( data, cutoff, fs, order=5):
-    nyq = 0.5 * fs
-    normal_cutoff = cutoff / nyq
-    b, a = butter(order, normal_cutoff, btype='high')
-    y = lfilter(b, a, data)
-    return y
-
-def butter_bandpass_filter(data, lowcut, highcut, fs, order=5):
-    nyq = 0.5 * fs
-    low = lowcut / nyq
-    high = highcut / nyq
-    b, a = butter(order, [low, high], btype='band')
-    y = lfilter(b, a, data)
-    return y
-
-def butter_lowpass_filter(data, cutoff, fs, order=5):
-    nyq = 0.5 * fs
-    normal_cutoff = cutoff / nyq
-    b, a = butter(order, normal_cutoff, btype='low')
-    y = lfilter(b, a, data)
-    return y
 
 def get_state_dict(origin_dict):
     old_keys = origin_dict.keys()
@@ -208,63 +172,6 @@ class Hdf5:
     def get_patchlist(self):
         return self.source
 
-    def get_channels(self, num_layer=3):
-        _c = {}
-        for key1 in ["net", "net2", "net3", "anet"]:
-            _c[key1] = {}
-
-        if self.dataset == "hcp":
-            _c["net"]["ts"] = 1600
-            _c["net"]["sm"] = 128
-            _c["net2"]["ts"] = 4800
-            _c["net2"]["sm"] = 256
-            _c["net3"]["ts"] = 4800
-            _c["net3"]["sm"] = 256
-            _c["anet"]["ts"] = 192
-            _c["anet"]["sm"] = 256
-
-        elif self.dataset == "bcp" or self.dataset == "bcp_unseen":
-            _c["net"]["ts"] = 576
-            _c["net"]["sm"] = 128
-            _c["net2"]["ts"] = 1664
-            _c["net2"]["sm"] = 384
-            _c["net3"]["ts"] = 4800
-            _c["net3"]["sm"] = 256
-            _c["anet"]["ts"] = 192
-            _c["anet"]["sm"] = 256
-
-        elif self.dataset == "mb6":
-            _c["net"]["ts"] = 1344
-            _c["net"]["sm"] = 128
-            _c["net2"]["ts"] = 4000
-            _c["net2"]["sm"] = 256
-            _c["net3"]["ts"] = 4800
-            _c["net3"]["sm"] = 256
-            _c["anet"]["ts"] = 192
-            _c["anet"]["sm"] = 256
-
-        elif self.dataset == "std":
-            _c["net"]["ts"] = 256
-            _c["net"]["sm"] = 128
-            _c["net2"]["ts"] = 800
-            _c["net2"]["sm"] = 256
-            _c["net3"]["ts"] = 224
-            _c["net3"]["sm"] = 864
-            _c["anet"]["ts"] = 192
-            _c["anet"]["sm"] = 256
-        elif self.dataset == "all":
-            return None
-        else:
-            raise ValueError("Unknown dataset {}".format(self.dataset))
-
-        c = {}
-        for key1 in _c.keys():
-            c[key1] = {}
-            for key2 in ["sm", "ts"]:
-                c[key1][key2] = [_c[key1][key2] // pow(2, i) for i in range(num_layer)]
-
-        return c
-
     def getDataDicByIndex(self, index):
         with open(self.source, 'r') as f:
             files = f.readlines()
@@ -343,23 +250,7 @@ class Hdf5:
                 if hf["label"][0][0] == 1.:
                     count += 1
         return count, total
-    """
-    def infoGain(self):
-        with open(self.source, 'r') as f:
-            files = f.readlines()
 
-        total = len(files)
-        count = [0, 0]
-        files = files
-        for file in files:
-            with h5py.File(file.strip(), "r") as hf:
-                if hf["label"][0][0] == 1.:
-                    count[1] += 1
-                else:
-                    count[0] += 1
-
-        return 1/count[0], 1/count[1]
-    """
 
 def get_sample_from_dir(dir):
     dir = dir.split("\\")[-2]
@@ -385,15 +276,3 @@ if __name__ == "__main__":
 
             total = len(train_lines) + len(test_lines)
             print(f"{dataset} {i}", len(train_lines), len(test_lines), f"{len(train_lines)/total*100:.2f}%")
-
-
-        # count, total = 0, 0
-        # for i in range(1,6):
-        #     hdf5 = Hdf5(dataset=dataset, is_train=False, num_source=i, data_keys=parser.data_keys, source_dir=parser.path_source)
-        #     c, t = hdf5.count()
-        #     count += c
-        #     total += t
-        #
-        # print("{} : signal {}/{} [{:.2f}%] noise {}/{} [{:.2f}%]".format(dataset, count, total, count/total*100, total-count, total, (total-count)/total*100))
-
-

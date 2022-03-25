@@ -1154,56 +1154,14 @@ def clip_3dimg(img, thre):
 
 
 if __name__ == '__main__':
-    #description = ""
-    #timestamp = random_sample_choice(dataset="hcp", sample=[1, 5, 43, 10, 5, 89, 25, 16, 97, 61, 33], comp=[40, 58, 69, 78, 158, 184, 88, 60, 131, 15, 77])
-    # timestamp = random_sample_correct_wrong(40, dataset="bcp")
-    # timestamps = [timestamp]
-    #timestamp = random_sample_correct_wrong(100, dataset="hcp")
-    #timestamps = [*timestamps, timestamp]
-    #timestamp = random_sample_correct_wrong_all(300, dataset="hcp")
-    #timestamps = [timestamp]
-    #timestamp = random_sample_correct_wrong_all(30, dataset="bcp")
-    #timestamps = [*timestamps, timestamp]
-    #timestamps = ["_20201118183419", "_20201130160213", "_20201201103906"]
-    #timestamps = [*timestamps, "_20210112180531", "_20210113130946"]
-    #timestamps = [*timestamps, "_20210113163316"]
-    #timestamps = ["_20210114174048", "_20210114180643"] #hcp
-    #timestamps = [*timestamps, "_20210114175003", "_20210114175808"] #bcp
-    #timestamps =[folder[-15:] for folder in os.listdir("./attention_maps") if "random_sample" in folder]
-    #timestamps = ["_20210115132243", "_20210115132333"]
-
-    # timestamps = ["_20210216200042", "_20210216142647"]
-    # timestamps = ["_20210115145756"]
-    # for timestamp in timestamps:
-    #     #timestamp = "_20201118183419"
-    #     #timestamp = "_20201130160213"
-    #     #timestamp = "_20201201103906"
-    #     prefix = "./attention_maps/random_sample_{}/".format(timestamp)
-    #     df = pd.read_csv(os.path.join(prefix, "cbam_correct.csv"))
-    #     #plot_sm_ts(df, dir=prefix+"/cbam_correct/")
-    #     plot_slice(df, dir=prefix+"/cbam_correct/")
-    #     try:
-    #         df = pd.read_csv(os.path.join(prefix, "cbam_wrong.csv"))
-    #         #plot_sm_ts(df, dir=prefix+"/cbam_wrong/")
-    #         plot_slice(df, dir=prefix + "/cbam_wrong/")
-    #     except Exception:
-    #         pass
-    #     print("timestamp : ", timestamp)
-
-    # df = pd.read_csv("./attention_maps/head motion.csv")
-    # dir = "./attention_maps/headmotion"
-    # dataset="hcp"
-    # for cv in range(1, 6):
-    #     print("dataset:{} cv:{}".format(dataset, cv))
-    #     grad_cam(dataset, cv, "sm", is_cbam=True, df=df, dir=dir)
-    #     grad_cam(dataset, cv, "sm", is_cbam=False, df=df, dir=dir)
-    #     grad_cam_ts(dataset, cv, "ts", is_cbam=True, df=df, dir=dir)
-    #     grad_cam_ts(dataset, cv, "ts", is_cbam=False, df=df, dir=dir)
-    #
-    # plot_slice(df, dir=dir)
-
-
-    # timestamp = "_20201118183419"
-    prefix = "./attention_maps/result_figure/"
-    df = pd.read_csv(os.path.join("./attention_maps/", "result figure hcp.csv"))
-    plot_slice(df, dir=prefix)
+    timestamps = ["_20210216200042", "_20210216142647"]
+    for timestamp in timestamps:
+        prefix = "./attention_maps/random_sample_{}/".format(timestamp)
+        df = pd.read_csv(os.path.join(prefix, "cbam_correct.csv"))
+        plot_slice(df, dir=prefix+"/cbam_correct/")
+        try:
+            df = pd.read_csv(os.path.join(prefix, "cbam_wrong.csv"))
+            plot_slice(df, dir=prefix + "/cbam_wrong/")
+        except Exception:
+            pass
+        print("timestamp : ", timestamp)

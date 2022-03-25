@@ -1,16 +1,10 @@
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-from config import config
 import time
 from model import *
 from util import *
-import resnet, cbam
+import cbam
 import numpy as np
 import pandas as pd
 from sklearn.metrics import roc_auc_score
-from sklearn.preprocessing import StandardScaler
-from pywt import cwt
 os.environ["CUDA_VISIBLE_DEVICES"] = '2'
 
 class Trainer:
@@ -89,8 +83,6 @@ class Trainer:
 
         ## define & init models
         self.net = nn.DataParallel(Resnet_fusion(res=res)).to(self.device)
-        # self.net = nn.DataParallel(LSTM(input_size=1, hidden_size=256)).to(self.device)
-        # print(net)
 
         ## train op
         info_gain_weight = torch.tensor(dataloader.infoGain(), dtype=torch.float).to(self.device)
@@ -311,18 +303,3 @@ if __name__ == "__main__":
     parser = config.parse_args()
     trainer = Trainer(config)
     trainer.cross()
-    # r = 50
-
-    # dataloader = DataLoaderTS(dataset="hcp", is_train=True, source_dir=parser.path_source, data_keys=parser.data_keys, num_source=3)
-    # #for i in range(100):
-    # tdata = dataloader.getDataDicByIndex(0)["tdata"].squeeze()
-    # fs = 1
-    # co, fr = cwt(tdata, range(1,r+1), "morl")
-    # co, fr = np.array(co), np.array(fr)
-    # print(co.shape, abs(co).max(), -abs(co).max())
-    # plt.imshow(co, extent=[-1, 1, 1, r], cmap='PRGn', aspect='auto', vmax = abs(co).max(), vmin = -abs(co).max())  # doctest: +SKIP
-    # plt.show()
-
-    #from PIL import Image
-    #img = Image.fromarray(co)
-    #img.save("wavelet.png")

@@ -4,7 +4,6 @@ from test import test
 import pandas as pd
 import torch
 
-
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 def cross(config):
