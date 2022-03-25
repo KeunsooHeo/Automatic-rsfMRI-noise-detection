@@ -1,4 +1,4 @@
-# Automatic-rsfMRI-noise-detection
+# Deep Attentive Spatio-Temporal Feature Learning for Automatic Resting-State fMRI Denoising
 The official implementation of *"Keun-Soo Heo, Dong-Hee Shin, Sheng-Che Hung, Weili Lin, Han Zhang, Dinggang Shen, Tae-Eui Kam, Deep Attentive Spatio-Temporal Feature Learning for Automatic Resting-State fMRI Denoising", NeuroImage, 2022.* [paper (IN PRESS)](https://doi.org/10.1016/j.neuroimage.2022.119127)
 
 - Contact : KeunsooHeo (gjrmstn1440@korea.ac.kr)
