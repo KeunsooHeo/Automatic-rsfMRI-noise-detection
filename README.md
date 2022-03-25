@@ -8,9 +8,10 @@ The official implementation of *"Keun-Soo Heo, Dong-Hee Shin, Sheng-Che Hung, We
 - Python 3.7++
 
 ## Overview
-<p align="center"><img src="https://user-images.githubusercontent.com/11483057/160055962-22382d8c-e39e-440f-8ee3-b22a1b342ff9.png" width="80%" /></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/11483057/160057719-dc43941d-5350-4d75-a7b2-dadfb1b89c1a.png" width="80%" /></p>
 
 ## Usage
+
 ### 1. Prepare data
 Dataset Human Connectome Project (HCP dataset) (Smith et al., 2013) and Whitehall II imaging study (WHII-MB6 and WHII-STD datasets) available in [FSL FIX](https://www.fmrib.ox.ac.uk/datasets/FIX-training) (Salimi-Khorshidi et al., 2014).
 
