@@ -3,7 +3,7 @@ The official implementation of *Keun-Soo Heo, Dong-Hee Shin, Sheng-Che Hung, Wei
 
 - Contact : KeunsooHeo (gjrmstn1440@korea.ac.kr)
 
-## Prerequisites
+## Dependencies
 - Pytorch 1.7++
 - Python 3.7++
 
@@ -13,13 +13,24 @@ The official implementation of *Keun-Soo Heo, Dong-Hee Shin, Sheng-Che Hung, Wei
 ## Usage
 
 ### 1. Prepare data
+Four datasets were trained.
+- [Baby Connectome Project](https://babyconnectomeproject.org/) (bcp)
+- [Human Connectome Project](http://www.humanconnectome.org/) (hcp)
+- [Whitehall II imaging study](http://www.psych.ox.ac.uk/research/neurobiology-of-ageing/research-projects-1/whitehall-oxford) (mb6, std)  
+
+
 Dataset Human Connectome Project (HCP dataset) (Smith et al., 2013) and Whitehall II imaging study (WHII-MB6 and WHII-STD datasets) available in [FSL FIX](https://www.fmrib.ox.ac.uk/datasets/FIX-training) (Salimi-Khorshidi et al., 2014).
 
 Download the dataset and put the data into "./data" directory. Then, adjust the directory name in Dataloader contained in "util.py".
 
 ### 2. Train & Test
 ```
-Solver.py --dataset={DATASET}
+# with attention module
+python solver.py --dataset=DATASET --iter_size=300 --network=cbam_test3_234
+
+
+# without attention module (resnet)
+python solver.py --dataset=DATASET --iter_size=300 --network=resnet_test2
 ```
 Adjust hyperparmeter in config.py
 
