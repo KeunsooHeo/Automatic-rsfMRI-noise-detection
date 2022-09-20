@@ -10,6 +10,20 @@ The official implementation of *Keun-Soo Heo, Dong-Hee Shin, Sheng-Che Hung, Wei
 ## Overview
 <p align="center"><img src="https://user-images.githubusercontent.com/11483057/160057719-dc43941d-5350-4d75-a7b2-dadfb1b89c1a.png" width="80%" /></p>
 
+## Citation
+If you utilize this code for your study, please cite our paper such as bibtex below:
+```
+@article{heo2022,
+  title={Deep attentive spatio-temporal feature learning for automatic resting-state fMRI denoising},
+  author={Heo, Keun-Soo and Shin, Dong-Hee and Hung, Sheng-Che and Lin, Weili and Zhang, Han and Shen, Dinggang and Kam, Tae-Eui},
+  journal={NeuroImage},
+  volume={254},
+  pages={119127},
+  year={2022},
+  publisher={Elsevier}
+}
+```
+
 ## Usage
 
 ### 1. Prepare data
