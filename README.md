@@ -13,15 +13,14 @@ The official implementation of *Keun-Soo Heo, Dong-Hee Shin, Sheng-Che Hung, Wei
 ## Citation
 If you utilize this code for your study, please cite our paper. Bibtex format is attached below:
 ```
-@article{heo2022,
-  title={Deep attentive spatio-temporal feature learning for automatic resting-state fMRI denoising},
-  author={Heo, Keun-Soo and Shin, Dong-Hee and Hung, Sheng-Che and Lin, Weili and Zhang, Han and Shen, Dinggang and Kam, Tae-Eui},
-  journal={NeuroImage},
-  volume={254},
-  pages={119127},
-  year={2022},
-  publisher={Elsevier}
-}
+@article{HEO2022,
+	author = {Keun-Soo Heo and Dong-Hee Shin and Sheng-Che Hung and Weili Lin and Han Zhang and Dinggang Shen and Tae-Eui Kam},
+	journal = {NeuroImage},
+	pages = {119127},
+	title = {Deep attentive spatio-temporal feature learning for automatic resting-state fMRI denoising},
+	volume = {254},
+	year = {2022}}
+
 ```
 
 ## Usage
