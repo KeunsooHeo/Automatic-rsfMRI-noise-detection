@@ -1,7 +1,14 @@
-# Deep Attentive Spatio-Temporal Feature Learning for Automatic Resting-State fMRI Denoising
+# [Neuroimage 2022] Deep Attentive Spatio-Temporal Feature Learning for Automatic Resting-State fMRI Denoising
 The official implementation of *Keun-Soo Heo, Dong-Hee Shin, Sheng-Che Hung, Weili Lin, Han Zhang, Dinggang Shen, Tae-Eui Kam, "Deep Attentive Spatio-Temporal Feature Learning for Automatic Resting-State fMRI Denoising", NeuroImage, 119127, 2022.* [paper](https://doi.org/10.1016/j.neuroimage.2022.119127)
 
 - Contact : Keun-Soo Heo (gjrmstn1440@korea.ac.kr)
+
+## ⚠️ Notice
+
+🚀 A newer version of this project is available!  
+
+Please visit 👉 [[MICCAI 2025] Sparsely Labeled fMRI Data Denoising with Meta-Learning-Based Semi-Supervised Domain Adaptation
+](https://github.com/KeunsooHeo/metaclean)
 
 ## Dependencies
 - Pytorch 1.7++
